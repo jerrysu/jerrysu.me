@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         dest: 'build/',
         options: {
           cascade: false,
-          map: true
+          /*map: true*/
         }
       }
     },
