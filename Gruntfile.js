@@ -16,7 +16,8 @@ module.exports = function(grunt) {
         options: {
           base: 'build/',
           open: true,
-          useAvailablePort: true
+          useAvailablePort: true,
+          livereload: true
         }
       }
     },
@@ -81,11 +82,17 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['src/css/**/*.css'],
-        tasks: ['css']
+        tasks: ['css'],
+        options: {
+          livereload: true
+        }
       },
       html: {
         files: ['src/**/*.html'],
-        tasks: ['html']
+        tasks: ['html'],
+        options: {
+          livereload: true
+        }
       } 
     }
   });
