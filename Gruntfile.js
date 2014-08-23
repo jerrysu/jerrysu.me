@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     autoprefixer: {
       dist: {
         expand: true,
-        cwd: 'build/',
+        cwd: 'src/',
         src: ['**/*.css', '!**/*.min.css'],
         dest: 'build/'
       }
