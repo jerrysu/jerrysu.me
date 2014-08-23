@@ -63,8 +63,8 @@ module.exports = function(grunt) {
       prod: {
         options: {
           src: 'build/',
-          dest: '/var/www/jerrysu.me/html/',
-          host: 'jerrysu.me'
+          dest: '<%= pkg.deployment.prod.path %>',
+          host: '<%= pkg.deployment.prod.host %>'
         }
       }
     },

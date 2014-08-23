@@ -16,5 +16,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jerrysu/jerrysu.me.git"
+  },
+  "deployment": {
+    "prod": {
+      "host": "jerrysu.me",
+      "path": "/var/www/jerrysu.me/html/"
+    }
   }
 }
