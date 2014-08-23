@@ -87,20 +87,13 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      css: {
-        files: ['src/css/**/*.css'],
-        tasks: ['css', 'cssmin'],
+      src: {
+        files: ['src/**/*'],
+        tasks: ['build'],
         options: {
           livereload: true
         }
-      },
-      html: {
-        files: ['src/**/*.html'],
-        tasks: ['htmlmin'],
-        options: {
-          livereload: true
-        }
-      } 
+      }
     }
   });
 
