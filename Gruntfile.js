@@ -15,11 +15,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    'cache-busting': {
-      css: {
-        replace: ['build/**/*.html'],
-        replacement: 'style.css',
-        file: 'build/css/style.css'
+    cacheBust: {
+      files: {
+        cwd: 'build/',
+        src: ['*.html'],
+        dest: 'build/',
+        expand: true
+      },
+      options: {
+        algorithm: 'md5',
+        baseDir: 'build/',
+        encoding: 'utf8',
+        rename: true
       }
     },
     clean: {
@@ -105,7 +112,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-cache-busting');
+  grunt.loadNpmTasks('grunt-cache-bust');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -116,8 +123,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('css', ['autoprefixer']);
   grunt.registerTask('build', ['copy', 'css']);
-  grunt.registerTask('dev', ['build', 'connect:server', 'watch']);
+  grunt.registerTask('dev', ['build', 'connect', 'watch']);
   grunt.registerTask('minify', ['cssmin', 'htmlmin']);
-  grunt.registerTask('deploy', ['clean', 'build', 'minify', 'cache-busting', 'rsync:prod']);
+  grunt.registerTask('deploy', ['clean', 'build', 'minify', 'cacheBust', 'rsync']);
   grunt.registerTask('default', ['dev']);
 };
