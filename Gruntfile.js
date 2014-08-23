@@ -15,6 +15,13 @@ module.exports = function(grunt) {
         }
       }
     },
+    'cache-busting': {
+      css: {
+        replace: ['build/**/*.html'],
+        replacement: 'style.css',
+        file: 'build/css/style.css'
+      }
+    },
     clean: {
       build: ['build/']
     },
@@ -98,6 +105,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-cache-busting');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -110,6 +118,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['copy', 'css']);
   grunt.registerTask('dev', ['build', 'connect:server', 'watch']);
   grunt.registerTask('minify', ['cssmin', 'htmlmin']);
-  grunt.registerTask('deploy', ['build', 'minify', 'rsync:prod']);
+  grunt.registerTask('deploy', ['clean', 'build', 'minify', 'cache-busting', 'rsync:prod']);
   grunt.registerTask('default', ['dev']);
 };
