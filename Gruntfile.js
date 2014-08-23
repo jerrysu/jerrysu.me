@@ -4,12 +4,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     autoprefixer: {
-      dist: {
+      build: {
         expand: true,
         cwd: 'src/',
         src: ['**/*.css', '!**/*.min.css'],
         dest: 'build/'
       }
+    },
+    clean: {
+      build: ['build/']
     },
     connect: {
       server: {
@@ -22,7 +25,7 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      dist: {
+      build: {
         files: [
           {
             expand: true,
@@ -34,7 +37,7 @@ module.exports = function(grunt) {
       }
     },
     cssmin: {
-      dist: {
+      build: {
         expand: true,
         cwd: 'build/css/',
         src: ['**/*.css', '!**/*.min.css'],
@@ -43,7 +46,7 @@ module.exports = function(grunt) {
       }
     },
     htmlmin: {
-      dist: {
+      build: {
         options: {
           removeComments: true,
           removeCommentsFromCDATA: true,
@@ -98,6 +101,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
