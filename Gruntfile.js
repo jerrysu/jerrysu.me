@@ -82,14 +82,14 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['src/css/**/*.css'],
-        tasks: ['css'],
+        tasks: ['css', 'cssmin'],
         options: {
           livereload: true
         }
       },
       html: {
         files: ['src/**/*.html'],
-        tasks: ['html'],
+        tasks: ['htmlmin'],
         options: {
           livereload: true
         }
@@ -105,10 +105,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-rsync');
 
-  grunt.registerTask('css', ['autoprefixer', 'cssmin']);
-  grunt.registerTask('html', ['htmlmin']);
-  grunt.registerTask('build', ['copy', 'css', 'html']);
+  grunt.registerTask('css', ['autoprefixer']);
+  grunt.registerTask('build', ['copy', 'css']);
   grunt.registerTask('dev', ['build', 'connect:server', 'watch']);
-  grunt.registerTask('deploy', ['build', 'rsync:prod']);
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('minify', ['cssmin', 'htmlmin']);
+  grunt.registerTask('deploy', ['build', 'minify', 'rsync:prod']);
+  grunt.registerTask('default', ['dev']);
 };
