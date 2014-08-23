@@ -1,6 +1,16 @@
 module.exports = function(grunt) {
+  'use strict';
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    autoprefixer: {
+      dist: {
+        expand: true,
+        cwd: 'build/',
+        src: ['**/*.css', '!**/*.min.css'],
+        dest: 'build/'
+      }
+    },
     connect: {
       server: {
         options: {
@@ -25,8 +35,8 @@ module.exports = function(grunt) {
     cssmin: {
       dist: {
         expand: true,
-        cwd: 'src/css/',
-        src: ['*.css', '!*.min.css'],
+        cwd: 'build/css/',
+        src: ['**/*.css', '!**/*.min.css'],
         dest: 'build/css/',
         ext: '.css'
       }
@@ -71,15 +81,16 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['src/css/**/*.css'],
-        tasks: ['cssmin']
+        tasks: ['css']
       },
       html: {
         files: ['src/**/*.html'],
-        tasks: ['htmlmin']
+        tasks: ['html']
       } 
     }
   });
 
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -87,7 +98,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-rsync');
 
-  grunt.registerTask('build', ['copy', 'cssmin', 'htmlmin']);
+  grunt.registerTask('css', ['autoprefixer', 'cssmin']);
+  grunt.registerTask('html', ['htmlmin']);
+  grunt.registerTask('build', ['copy', 'css', 'html']);
   grunt.registerTask('dev', ['build', 'connect:server', 'watch']);
   grunt.registerTask('deploy', ['build', 'rsync:prod']);
   grunt.registerTask('default', ['build']);

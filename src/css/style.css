@@ -21,9 +21,7 @@ body {
   /* Note: Performance pitfall on mobile when rendering a lot of text */
   /* http://www.marco.org/2012/11/15/text-rendering-optimize-legibility */
   text-rendering: optimizeLegibility;
-  -moz-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 h2,
