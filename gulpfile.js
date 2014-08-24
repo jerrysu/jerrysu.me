@@ -45,7 +45,7 @@ gulp.task('build-html', function() {
     .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('cdn', ['build'], function() {
+gulp.task('cache-bust', ['build'], function() {
   return gulp.src('build/**')
     .pipe(revall({
       ignore: [/^\/favicon.ico$/, '.html', /^\/fonts\//,]
@@ -53,7 +53,7 @@ gulp.task('cdn', ['build'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('minify', ['clean', 'copy', 'build', 'cdn'], function(next) {
+gulp.task('minify', ['clean', 'copy', 'build', 'cache-bust'], function(next) {
   runSequence(['minify-css', 'minify-html'], next);
 });
 
@@ -108,7 +108,7 @@ gulp.task('server', ['clean', 'copy', 'build'], function(next) {
   browserSync({server: {baseDir: 'build'}}, next);
 });
 
-gulp.task('deploy', ['clean', 'copy', 'build', 'cdn', 'minify'], function(next) {
+gulp.task('deploy', ['clean', 'copy', 'build', 'cache-bust', 'minify'], function(next) {
   // Note: Maybe create a Gulp plugin for this?
   rsync({
     ssh: true,
