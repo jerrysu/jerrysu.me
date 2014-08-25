@@ -8,10 +8,10 @@ var cssmin = require('gulp-minify-css');
 var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
 var revall = require('gulp-rev-all');
+var rsync = require('gulp-rsync');
 
 var browserSync = require('browser-sync');
 var rimraf = require('rimraf');
-var rsync = require('rsyncwrapper').rsync;
 var runSequence = require('run-sequence');
 
 var pkg = require('./package.json');
@@ -48,7 +48,7 @@ gulp.task('build-html', function() {
 gulp.task('cache-bust', ['build'], function() {
   return gulp.src('build/**')
     .pipe(revall({
-      ignore: [/^\/favicon.ico$/, '.html', /^\/fonts\//,]
+      ignore: [/^\/favicon.ico$/, '.html', /^\/fonts\//]
     }))
     .pipe(gulp.dest('build'));
 });
@@ -109,17 +109,14 @@ gulp.task('server', ['clean', 'copy', 'build'], function(next) {
 });
 
 gulp.task('deploy', ['clean', 'copy', 'build', 'cache-bust', 'minify'], function(next) {
-  // Note: Maybe create a Gulp plugin for this?
-  rsync({
-    ssh: true,
-    src: 'build/',
-    dest: pkg.targets.prod.host + ':' + pkg.targets.prod.path,
-    recursive: true,
-    args: ['--verbose']
-  }, function(err, stdout, stderr, cmd) {
-    console.log(stdout);
-    next();
-  });
+  return gulp.src('build/**')
+    .pipe(rsync({
+      root: 'build',
+      hostname: pkg.targets.prod.host,
+      destination: pkg.targets.prod.path,
+      incremental: true,
+      progress: true
+    }));
 });
 
 gulp.task('default', function() {
