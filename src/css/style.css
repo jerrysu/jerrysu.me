@@ -1,10 +1,18 @@
-@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+@font-face{
+  font-family: 'Avenir';
+  src: url('/fonts/Avenir.otf');
+}
+
+@font-face{
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/Avenir LT Std.otf');
+}
 
 html,
 body {
   background: #fff;
   color: #5d5d5d;
-  font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 25px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +27,8 @@ body {
 h2,
 strong,
 a {
-  font-weight: 900;
+  font-family: 'Avenir LT Std';
+  font-weight: bold;
 }
 
 a {
@@ -33,10 +42,9 @@ a:hover {
 }
 
 .container {
-  font-size: 22px;
-  letter-spacing: 0.005em;
+  font-size: 20px;
   line-height: 1.28em;
-  margin: 3em auto 2em;
+  margin: 4em auto 2em;
   width: 640px;
 }
 
@@ -46,7 +54,7 @@ a:hover {
   content: '';
   display: block;
   height: 213px;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
 }
 
 p {
@@ -54,7 +62,7 @@ p {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 1.25em 0 0.75em;
 }
 
