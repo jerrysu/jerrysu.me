@@ -55,13 +55,13 @@ p {
 
 h2 {
   font-size: 20px;
-  margin: 1.25em 0 0.75em;
+  margin: 1em 0 0.5em;
 }
 
 ul {
-  font-size: 18px;
+  font-size: 20px;
   margin: 0;
-  padding-right: 1.25em;
+  padding-right: 1em;
 }
 
 ul.experience li {
@@ -106,11 +106,11 @@ ul.links li:last-child:after {
   p,
   h2,
   ul {
-    padding: 0 1em;
+    padding: 0 0.5em;
   }
 
   ul {
-    padding-left: 2em;
+    padding-left: 1.75em;
   }
 
   ul.links li {
