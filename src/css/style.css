@@ -36,7 +36,7 @@ a:hover {
   font-size: 22px;
   letter-spacing: 0.005em;
   line-height: 1.28em;
-  margin: 4em auto 2em;
+  margin: 3em auto 2em;
   width: 640px;
 }
 
@@ -46,7 +46,7 @@ a:hover {
   content: '';
   display: block;
   height: 213px;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 
 p {
