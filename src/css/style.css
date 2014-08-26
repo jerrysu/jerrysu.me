@@ -33,7 +33,7 @@ a:hover {
 }
 
 .container {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.28em;
   margin: 3em auto 2em;
   width: 640px;
@@ -49,17 +49,17 @@ a:hover {
 }
 
 p {
-  letter-spacing: 0.005em;
+  letter-spacing: 0.02em;
   margin: 1em 0;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 1em 0 0.5em;
 }
 
 ul {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
   padding-right: 1em;
 }
@@ -106,7 +106,7 @@ ul.links li:last-child:after {
   p,
   h2,
   ul {
-    padding: 0 0.5em;
+    padding: 0 0.75em;
   }
 
   ul {
