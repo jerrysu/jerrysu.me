@@ -34,7 +34,6 @@ a:hover {
 
 .container {
   font-size: 22px;
-  letter-spacing: 0.005em;
   line-height: 1.28em;
   margin: 3em auto 2em;
   width: 640px;
@@ -50,6 +49,7 @@ a:hover {
 }
 
 p {
+  letter-spacing: 0.005em;
   margin: 1em 0;
 }
 
