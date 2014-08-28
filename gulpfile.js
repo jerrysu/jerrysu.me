@@ -48,7 +48,7 @@ gulp.task('build-html', function() {
 gulp.task('cache-bust', ['build'], function() {
   return gulp.src('build/**')
     .pipe(revall({
-      ignore: [/^\/favicon.ico$/, '.html', /^\/fonts\//]
+      ignore: [/^\/favicon.ico$/, '.html']
     }))
     .pipe(gulp.dest('build'));
 });
