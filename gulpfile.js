@@ -11,13 +11,13 @@ var revall = require('gulp-rev-all');
 var rsync = require('gulp-rsync');
 
 var browserSync = require('browser-sync');
-var rimraf = require('rimraf');
+var del = require('del');
 var runSequence = require('run-sequence');
 
 var pkg = require('./package.json');
 
 gulp.task('clean', function(next) {
-  rimraf('build', next);
+  del('build', next);
 });
 
 gulp.task('copy', ['clean'], function() {

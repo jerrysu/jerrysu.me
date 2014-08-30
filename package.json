@@ -5,6 +5,7 @@
   "author": "Jerry Su",
   "devDependencies": {
     "browser-sync": "^1.3.6",
+    "del": "^0.1.2",
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "0.0.8",
     "gulp-cached": "^1.0.1",
@@ -14,8 +15,6 @@
     "gulp-minify-css": "^0.3.7",
     "gulp-rev-all": "^0.6.3",
     "gulp-rsync": "0.0.2",
-    "rimraf": "^2.2.8",
-    "rsyncwrapper": "^0.4.1",
     "run-sequence": "^0.3.6"
   },
   "private": true,
