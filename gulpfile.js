@@ -2,21 +2,24 @@
 
 var gulp = require('gulp');
 var addsrc = require('gulp-add-src');
-var autoprefixer = require('gulp-autoprefixer');
 var cache = require('gulp-cached');
 var csslint = require('gulp-csslint');
 var cssmin = require('gulp-minify-css');
-var foreach = require('gulp-foreach');
+var filter = require('gulp-filter');
 var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
+var postcss = require('gulp-postcss');
 var replace = require('gulp-replace');
 var revall = require('gulp-rev-all');
 var rimraf = require('gulp-rimraf');
 var rsync = require('gulp-rsync');
 var sass = require('gulp-ruby-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
+var autoprefixer = require('autoprefixer-core');
 var browserSync = require('browser-sync');
 var del = require('del');
+var mqpacker = require('css-mqpacker');
 var path = require('path');
 var runSequence = require('run-sequence');
 var through = require('through2');
@@ -37,23 +40,20 @@ gulp.task('build', ['copy'], function(next) {
 });
 
 gulp.task('build-css', function() {
+  var filterMap = filter('**/*.map');
   return gulp.src('src/**/*.scss')
     .pipe(cache('scss'))
     .pipe(sass())
-    .pipe(addsrc('src/**/*.css'))
-    .pipe(foreach(function(stream, file) {
-      if (!/\.css$/.test(file.path)) {
-        return stream;
-      }
-
-      var name = path.basename(file.path);
-      return stream.pipe(autoprefixer({
-        cascade: false,
-        map: true,
-        from: name,
-        to: name
-      }));
-    }))
+    .pipe(filterMap)
+    .pipe(addsrc(['src/**/*.css', '!src/**/*.min.css']))
+    .pipe(cache('css'))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(postcss([
+      autoprefixer({cascade: false}),
+      mqpacker
+    ]))
+    .pipe(sourcemaps.write({sourceRoot: '/'}))
+    .pipe(filterMap.restore())
     .pipe(gulp.dest('build'))
     .pipe(browserSync.reload({stream: true}));
 });
