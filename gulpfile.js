@@ -28,7 +28,7 @@ gulp.task('clean', function(next) {
 });
 
 gulp.task('copy', ['clean'], function() {
-  return gulp.src(['src/**', '!src/**/*.scss'])
+  return gulp.src('src/**')
     .pipe(gulp.dest('build'));
 });
 
@@ -69,6 +69,7 @@ gulp.task('build-html', function() {
 // Remove all development-related files.
 gulp.task('clean-dev', ['build'], function() {
   return gulp.src([
+    'build/**/*.scss',
     'build/**/*.css.map'
   ], {read: false}).pipe(rimraf());
 });
