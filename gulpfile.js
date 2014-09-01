@@ -40,11 +40,11 @@ gulp.task('build', ['copy'], function(next) {
 });
 
 gulp.task('build-css', function() {
-  var filterMap = filter('**/*.map');
+  var filterCSS = filter('**/*.css');
   return gulp.src('src/**/*.scss')
     .pipe(cache('scss'))
-    .pipe(sass())
-    .pipe(filterMap)
+    .pipe(sass({sourcemap: true, sourcemapPath: '..'}))
+    .pipe(filterCSS)
     .pipe(addsrc(['src/**/*.css', '!src/**/*.min.css']))
     .pipe(cache('css'))
     .pipe(sourcemaps.init({loadMaps: true}))
@@ -52,8 +52,8 @@ gulp.task('build-css', function() {
       autoprefixer({cascade: false}),
       mqpacker
     ]))
-    .pipe(sourcemaps.write({sourceRoot: '/'}))
-    .pipe(filterMap.restore())
+    .pipe(sourcemaps.write('.'))
+    .pipe(filterCSS.restore())
     .pipe(gulp.dest('build'))
     .pipe(browserSync.reload({stream: true}));
 });
