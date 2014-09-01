@@ -4,7 +4,7 @@
 html,
 body {
   background: #fff;
-  color: #5d5d5d;
+  color: $font-color;
   font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 25px;
   -moz-osx-font-smoothing: grayscale;
@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  font-size: 20px;
+  font-size: $large-font-size;
   line-height: 1.28em;
   margin: 3em auto 2em;
   width: 640px;
@@ -48,7 +48,7 @@ p {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: $normal-font-size;
   margin: 1em 0 0.5em;
 
   @media #{$mobile} {
@@ -57,7 +57,7 @@ h2 {
 }
 
 ul {
-  font-size: 18px;
+  font-size: $normal-font-size;
   margin: 0;
   padding-right: 1em;
 
@@ -67,12 +67,12 @@ ul {
 }
 
 a {
-  color: #3b8bba;
+  color: $link-color;
   font-weight: 900;
   text-decoration: none;
 
   &:hover {
-    color: #2f6f94;
+    color: darken($link-color, 10%);
     text-decoration: underline;
   }
 }
