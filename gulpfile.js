@@ -41,7 +41,7 @@ gulp.task('build', ['copy'], function(next) {
 
 gulp.task('build-css', function() {
   var filterCSS = filter('**/*.css');
-  return gulp.src('src/**/*.scss')
+  return gulp.src(['src/**/*.scss', '!src/css/variables.scss'])
     .pipe(cache('scss'))
     .pipe(sass({sourcemap: true, sourcemapPath: '..'}))
     .pipe(filterCSS)
